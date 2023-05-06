@@ -1,11 +1,12 @@
 const Mongoose = require("mongoose")
-const localDB = `mongodb://localhost:270127/user-auth`
+const database = "mongodb+srv://vladzizic:PasQ4fXrDthSHITw@cluster0.omezruv.mongodb.net/user-authentication"
 
 const connectDB = async () => {
-    await Mongoose.connect(localDB, {
+    await Mongoose.connect(database, {
         useNewUrlParser: true,
-        useInifiedTopology: true,
+        useUnifiedTopology: true,
     })
-    console.log("MongoDB Connected")
+    .then(()=> console.log("Connected to DB"))
+    .catch(console.error);
 }
 module.exports = connectDB

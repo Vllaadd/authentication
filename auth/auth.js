@@ -7,7 +7,7 @@ exports.register = async (req, res, next) => {
         return res.status(400).json({ message: "Password less than 6 characters"})
     }try{
         await User.create({
-            username,
+            username, 
             password,
         }).then(user =>
             res.status(200).json({

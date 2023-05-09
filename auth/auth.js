@@ -84,7 +84,7 @@ exports.register = async (req, res, next) => {
         });
     }else{
         res.status(400).json({
-            messsage: "Role is not admin",
+            message: "Role is not admin",
         })
     }
 }else{

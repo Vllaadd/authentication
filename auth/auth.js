@@ -54,40 +54,43 @@ exports.register = async (req, res, next) => {
     }
 
 // update function
-    exports.update = async(req, res, next) => {
-        const { role, id } = req.body
-//verifying if role and id is present
-    if(role && id) {
-// verifying if the value of role is admin 
-    if(role === "admin"){
+exports.update = async (req, res, next) => {
+    const { role, id } = req.body;
+    // Verifying if role and id is presnt
+    if (role && id) {
+      // Verifying if the value of role is admin
+      if (role === "admin") {
+        // Finds the user with the id
         await User.findById(id)
-        .then((user) => {
-            if(user.role !== "admin"){
-                user.role = role;
-                user.save((err) => {
-                    if(err){
-                        return res
-                            .status("400")
-                            .json({message: "An error occurred", error: err.message });
-                            process.exit(1);
-                    }
-                    res.status("201").json({message: "Update successful", user });
-                });
-            }else{
-                res.status(400).json({message: "User is already Admin"});
+          .then((user) => {
+            // Verifies the user is not an admin
+            if (user.role !== "admin") {
+              user.role = role;
+              user.save((err) => {
+                //Monogodb error checker
+                if (err) {
+                  return res
+                    .status("400")
+                    .json({ message: "An error occurred", error: err.message });
+                  process.exit(1);
+                }
+                res.status("201").json({ message: "Update successful", user });
+              });
+            } else {
+              res.status(400).json({ message: "User is already an Admin" });
             }
-        })
-        .catch((error) => {
+          })
+          .catch((error) => {
             res
-            .status(400)
-            .json({message: "An error occurred", error: error.message});
-        });
-    }else{
+              .status(400)
+              .json({ message: "An error occurred", error: error.message });
+          });
+      } else {
         res.status(400).json({
-            message: "Role is not admin",
-        })
+          message: "Role is not admin",
+        });
+      }
+    } else {
+      res.status(400).json({ message: "Role or Id not present" });
     }
-}else{
-    res.status(400).json({message: "Role or Id not present."})
-        }
-    };  
+  };

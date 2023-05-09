@@ -1,11 +1,11 @@
 const express = require("express");
-const { register, login } = require("./auth");
+const { register, login, update } = require("./auth");
 
 const router = express.Router();
 
-
-router.route("/login").post(login);
 router.route("/register").post(register);
+router.route("/login").post(login);
+router.route("update").putt(update)
 
 
 

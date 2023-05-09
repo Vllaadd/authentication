@@ -24,6 +24,7 @@ exports.register = async (req, res, next) => {
      }
     }
 
+// login function 
     exports.login = async (req, res, next) => {
         const { username, password } = req.body
         if(!username || !password) {
@@ -51,3 +52,42 @@ exports.register = async (req, res, next) => {
             })
         }
     }
+
+// update function
+    exports.update = async(req, res, next) => {
+        const { role, id } = req.body
+//verifying if role and id is present
+    if(role && id) {
+// verifying if the value of role is admin 
+    if(role === "admin"){
+        await User.findById(id)
+        .then((user) => {
+            if(user.role !== "admin"){
+                user.role = role;
+                user.save((err) => {
+                    if(err){
+                        return res
+                            .status("400")
+                            .json({message: "An error occurred", error: err.message });
+                            process.exit(1);
+                    }
+                    res.status("201").json({message: "Update successful", user });
+                });
+            }else{
+                res.status(400).json({message: "User is already Admin"});
+            }
+        })
+        .catch((error) => {
+            res
+            .status(400)
+            .json({message: "An error occurred", error: error.message});
+        });
+    }else{
+        res.status(400).json({
+            messsage: "Role is not admin",
+        })
+    }
+}else{
+    res.status(400).json({message: "Role or Id not present."})
+        }
+    };  

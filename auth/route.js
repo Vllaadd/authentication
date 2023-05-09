@@ -1,10 +1,10 @@
 const express = require("express");
-const { register } = require("./auth");
+const { register, login } = require("./auth");
 
 const router = express.Router();
 
 
-
+router.route("/login").post(login);
 router.route("/register").post(register);
 
 

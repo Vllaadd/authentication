@@ -56,18 +56,18 @@ exports.register = async (req, res, next) => {
 // update function
 exports.update = async (req, res, next) => {
     const { role, id } = req.body;
-    // Verifying if role and id is presnt
+// Verifying if role and id is presnt
     if (role && id) {
-      // Verifying if the value of role is admin
+// Verifying if the value of role is admin
       if (role === "admin") {
         // Finds the user with the id
         await User.findById(id)
           .then((user) => {
-            // Verifies the user is not an admin
+// Verifies the user is not an admin
             if (user.role !== "admin") {
               user.role = role;
               user.save((err) => {
-                //Monogodb error checker
+//Monogodb error checker
                 if (err) {
                   return res
                     .status("400")

@@ -10,11 +10,10 @@ This project focuses on user authentication and provides functionality for user 
     4. MERN 
 
 ## Methods Used 
-    • .create() - Used to create a new user in the database using hte User model 
-    • .json() - used to send a JSON response back to the client after successfully creating a user 
-    • .findOne() - used to search for a user in thedatabse based on the provided "username" and "password" 
-    • .post() - used to define a route handler for the HTTP POST method on the "/login" endpoint 
-    • .put() - used to update an existing resource on the server 
+    • **.create()** - Used to create a new user in the database using hte User model 
+    • **.json()** - used to send a JSON response back to the client after successfully creating a user 
+    • **.findOne()** - used to search for a user in thedatabse based on the provided "username" and "password" 
+    • **.deleteOne()** - function provided by Mongoose used to delete a single document
 
 ## Usage 
     1. Register: Create your account by providing a unique username and password 

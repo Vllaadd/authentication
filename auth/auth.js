@@ -55,42 +55,31 @@ exports.register = async (req, res, next) => {
 
 // update function
 exports.update = async (req, res, next) => {
-    const { role, id } = req.body;
-// Verifying if role and id is presnt
-    if (role && id) {
-// Verifying if the value of role is admin
-      if (role === "admin") {
-        // Finds the user with the id
-        await User.findById(id)
-          .then((user) => {
-// Verifies the user is not an admin
-            if (user.role !== "admin") {
-              user.role = role;
-              user.save((err) => {
+  const { role, id } = req.body;
+  if (role && id) {
+    if (role === "admin") {
+      await User.findById(id)
+        .then((user) => {
+            user.role = role;
+            user.save((err) => {
 //Monogodb error checker
-                if (err) {
-                  return res
-                    .status("400")
-                    .json({ message: "An error occurred", error: err.message });
-                  process.exit(1);
-                }
-                res.status("201").json({ message: "Update successful", user });
-              });
-            } else {
-              res.status(400).json({ message: "User is already an Admin" });
-            }
+              if (err) {
+                return res
+                  .status("400")
+                  .json({ message: "An error occurred", error: err.message });
+                process.exit(1);
+              }
+              res.status("201").json({ message: "Update successful", user });
+            });
           })
-          .catch((error) => {
-            res
-              .status(400)
-              .json({ message: "An error occurred", error: error.message });
-          });
-      } else {
-        res.status(400).json({
-          message: "Role is not admin",
+          .catch((error) =>{
+          res.status(400).json({ message: "An error occured", error: error.message });
         });
-      }
+        } else {
+            res.status(400).json({ message: "User is already an Admin" });
+          }
     } else {
-      res.status(400).json({ message: "Role or Id not present" });
+      res.status(400).json({ message: "ROle or Id not present"});
     }
-  };
+    };
+

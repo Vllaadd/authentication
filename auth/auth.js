@@ -57,29 +57,22 @@ exports.register = async (req, res, next) => {
 exports.update = async (req, res, next) => {
   const { role, id } = req.body;
   if (role && id) {
-    if (role === "admin") {
-      await User.findById(id)
-        .then((user) => {
-            user.role = role;
-            user.save((err) => {
-//Monogodb error checker
-              if (err) {
-                return res
-                  .status("400")
-                  .json({ message: "An error occurred", error: err.message });
-                process.exit(1);
-              }
-              res.status("201").json({ message: "Update successful", user });
-            });
-          })
-          .catch((error) =>{
-          res.status(400).json({ message: "An error occured", error: error.message });
-        });
-        } else {
-            res.status(400).json({ message: "User is already an Admin" });
-          }
-    } else {
-      res.status(400).json({ message: "ROle or Id not present"});
+    try {
+      const user = await User.findById(id);
+      if (user.role === "admin") {
+        res.status(400).json({ message: "User is already an Admin" });
+      } else {
+        user.role = role;
+        await user.save();
+        res.status(201).json({ message: "Update successful", user });
+      }
+    } catch (error) {
+      res.status(400).json({ message: "An error occurred", error: error.message });
     }
-    };
+  } else {
+    res.status(400).json({ message: "Role or Id not present" });
+  }
+};
+
+
 

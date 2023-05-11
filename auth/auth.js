@@ -7,7 +7,7 @@ exports.register = async (req, res, next) => {
     if(password.length < 6) {
         return res.status(400).json({ message: "Password less than 6 characters"})
     }try{
-      bcryptjs.hash(password, 10).then(async (hash) => {
+     await bcryptjs.hash(password, 10).then(async (hash) => {
         await User.create({
             username, 
             password: hash,
@@ -48,7 +48,7 @@ exports.register = async (req, res, next) => {
                     error: "User not found",
                 })
             }else{
-              bcryptjs.compare(password, user.password).then(function (result){
+             await bcryptjs.compare(password, user.password).then(function (result){
                 result
                 ? res.status(200).json({
                   message: "Login successful",

@@ -16,6 +16,7 @@ This project focuses on user authentication and provides functionality for user 
     • .deleteOne() - function provided by Mongoose used to delete a single document
     • jsonwebtoken - to send tokens to registered clients 
     • hash password - to hide passwords stored in database
+    • cookie-parser to protect the routes
 
 ## Usage 
     1. Register: Create your account by providing a unique username and password 

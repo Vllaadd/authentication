@@ -14,8 +14,8 @@ This project focuses on user authentication and provides functionality for user 
     • .json() - used to send a JSON response back to the client after successfully creating a user 
     • .findOne() - used to search for a user in thedatabse based on the provided "username" and "password" 
     • .deleteOne() - function provided by Mongoose used to delete a single document
-    • jsonwebtoken 
-    • hash password 
+    • jsonwebtoken - to send tokens to registered clients 
+    • hash password - to hide passwords stored in database
 
 ## Usage 
     1. Register: Create your account by providing a unique username and password 

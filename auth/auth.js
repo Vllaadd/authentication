@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const bcryptjs = require("bcryptjs");
 
-//registration function 
+//REGISTRATION FUNCTION WITH HASH 
 exports.register = async (req, res, next) => {
     const { username, password } = req.body
     if(password.length < 6) {
@@ -32,7 +32,7 @@ exports.register = async (req, res, next) => {
     };
   };
 
-// login function 
+//LOGIN FUNCTION  
     exports.login = async (req, res, next) => {
         const { username, password } = req.body
         if(!username || !password) {
@@ -48,10 +48,14 @@ exports.register = async (req, res, next) => {
                     error: "User not found",
                 })
             }else{
-                res.status(200).json({
-                    message: "Login successful",
-                    user,
+              bcryptjs.compare(password, user.password).then(function (result){
+                result
+                ? res.status(200).json({
+                  message: "Login successful",
+                  user,
                 })
+                : res.status(400).json({ message: "Login not succesful" })
+              })
             }
         }catch(error){
             res.status(400).json({
@@ -61,7 +65,7 @@ exports.register = async (req, res, next) => {
         }
     }
 
-// update function
+//UPDATE FUNCTION 
 exports.update = async (req, res, next) => {
   const { role, id } = req.body;
   if (role && id) {
@@ -83,7 +87,7 @@ exports.update = async (req, res, next) => {
 };
 
 
-//delete function 
+//DELETE FUNCTION  
 exports.deleteUser = async(req, res, next) => {
   const { id } = req.body
   await User.findById(id)

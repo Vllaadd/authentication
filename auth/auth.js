@@ -41,7 +41,7 @@ exports.register = async (req, res, next) => {
             })
         }
         try{
-            const user = await User.findOne({ username, password })
+            const user = await User.findOne({ username })
             if(!user) {
                 res.status(401).json({
                     message: "login not successful",

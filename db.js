@@ -1,5 +1,5 @@
 const Mongoose = require("mongoose")
-const database = "mongodb+srv://vladzizic:PasQ4fXrDthSHITw@cluster0.omezruv.mongodb.net/user-authentication"
+const database = "mongodb+srv://vladzizic:PasQ4fXrDthSHITw@cluster0.omezruv.mongodb.net/user-authentication";
 
 const connectDB = async () => {
     await Mongoose.connect(database, {

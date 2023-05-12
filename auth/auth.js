@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const jwtSecret = 'd5f0dfc7595c92c8284f023d264780e97731e00f9feb0c9b59eb9a8adf8d8d0619586d'
+const jwtSecret = 'd5f0dfc7595c92c8284f023d264780e97731e00f9feb0c9b59eb9a8adf8d8d0619586d';
 
 //REGISTRATION FUNCTION
 exports.register = async (req, res, next) => {

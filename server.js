@@ -6,6 +6,14 @@ const authRouter = require("./auth/route");
 const cookieParser = require('cookie-parser');
 const { adminAuth, userAuth } = require("./middleware/auth");
 
+//setting EJS as our default view engine
+app.set("view engine", "ejs");
+app.get("/", (req, res) => res.render("home"))
+app.get("/register", (req, res) => res.render("register"))
+app.get("/login", (req, res) => res.render("login"))
+app.get("/admin", adminAuth, (req, res) => res.render("admin"))
+app.get("/basic", userAuth, (req, res) => res.render("user"))
+
 connectDB();
 app.use(express.json());
 

@@ -53,9 +53,7 @@ exports.login = async (req, res, next) => {
     return res.status(400).json({
       message: "Username or Password not present",
     });
-  }
-  
-  try {
+  }try{
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(401).json({

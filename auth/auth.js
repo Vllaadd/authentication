@@ -46,6 +46,22 @@ exports.register = async (req, res, next) => {
     };
   };
 
+  exports.getUsers = async (req, res, next) => {
+    await User.find({})
+    .then(users => {
+      const userFunction = users.map(user => {
+        const container = {}
+        container.username = user.username
+        container.role = user.role
+        return container
+      })
+      res.status(200).json({user: userFunction})
+    })
+    .catch(err =>
+      res.status(401).json({message: "Not successful", error: err.message})
+      )
+  }
+
 //LOGIN FUNCTION  
 exports.login = async (req, res, next) => {
   const { username, password } = req.body;

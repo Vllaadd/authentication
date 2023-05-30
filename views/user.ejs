@@ -11,7 +11,7 @@
     <ul></ul>
 
         <script>
-            const u1 = document.querySelector("ul")
+            const ul = document.querySelector("ul")
             const getUsers = async () => {
                 const res = await fetch("/api/auth/getUsers")
                 const data = await res.json()

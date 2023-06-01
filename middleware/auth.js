@@ -3,7 +3,7 @@ const jwtSecret = 'd5f0dfc7595c92c8284f023d264780e97731e00f9feb0c9b59eb9a8adf8d8
 
 //ADMIN AUTHENTICATION
 exports.adminAuth = (req, res, next) => {
-    const token = req.cookies.jwt
+    const token = req.cookies.jwt;
     if(token){
         jwt.verify(token, jwtSecret, (err, decodedToken) => {
             if(err){

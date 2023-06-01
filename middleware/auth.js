@@ -7,7 +7,7 @@ exports.adminAuth = (req, res, next) => {
     if(token){
         jwt.verify(token, jwtSecret, (err, decodedToken) => {
             if(err){
-                return res.statis(401).json({ message: "Not authorized"})
+                return res.status(401).json({ message: "Not authorized"})
             }else{
                 if(decodedToken.role !== "admin"){
                     return res.status(401).json({message: "Not authorized"})

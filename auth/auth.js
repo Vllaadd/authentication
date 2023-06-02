@@ -1,6 +1,6 @@
-import { create, find, findOne, findById } from "../models/User";
-import { hash as _hash, compare } from "bcryptjs";
-import { sign } from "jsonwebtoken";
+const { create, find, findOne, findById } = require("../models/User");
+const bcryptjs = require("bcryptjs");
+const token = require("jsonwebtoken");
 const jwtSecret = 'd5f0dfc7595c92c8284f023d264780e97731e00f9feb0c9b59eb9a8adf8d8d0619586d';
 
 //REGISTRATION FUNCTION
@@ -9,7 +9,7 @@ export async function register(req, res, next) {
     if(password.length < 6) {
         return res.status(400).json({ message: "Password less than 6 characters"})
     }
-     _hash(password, 10).then(async (hash) => {
+     hash(password, 10).then(async (hash) => {
         await create({
             username, 
             password: hash,

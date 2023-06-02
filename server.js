@@ -1,10 +1,10 @@
-const express = require("express")
+import express, { json } from "express";
 const app = express()
 const PORT = 3000
-const connectDB = require("./db")
-const authRouter = require("./auth/route");
-const cookieParser = require('cookie-parser');
-const { adminAuth, userAuth } = require("./middleware/auth");
+import connectDB from "./db";
+import authRouter from "./auth/route";
+import cookieParser from 'cookie-parser';
+import { adminAuth, userAuth } from "./middleware/auth";
 
 //setting EJS as our default view engine
 app.set("view engine", "ejs");
@@ -19,7 +19,7 @@ app.get("/logout", (req, res) => {
 })
 
 connectDB();
-app.use(express.json());
+app.use(json());
 
 app.use("/api/auth", authRouter);
 app.use(cookieParser());

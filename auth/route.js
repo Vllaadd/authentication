@@ -1,9 +1,9 @@
-const express = require("express");
-const { register, login, update, deleteUser } = require("./auth");
-const { adminAuth } = require("../middleware/auth");
+import { Router } from "express";
+import { register, login, update, deleteUser } from "./auth";
+import { adminAuth } from "../middleware/auth";
 
 
-const router = express.Router();
+const router = Router();
 
 
 
@@ -16,4 +16,4 @@ router.route("/deleteUser").delete(adminAuth, deleteUser);
 
 
 
-module.exports = router;
+export default router;

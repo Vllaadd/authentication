@@ -1,45 +1,44 @@
 const jwt = require("jsonwebtoken");
-const jwtSecret = 'd5f0dfc7595c92c8284f023d264780e97731e00f9feb0c9b59eb9a8adf8d8d0619586d';
+const jwtSecret =
+  "4715aed3c946f7b0a38e6b534a9583628d84e96d10fbc04700770d572af3dce43625dd";
 
-//ADMIN AUTHENTICATION
-export function adminAuth(req, res, next) {
-    const token = req.cookies.jwt;
-    if(token){
-        verify(token, jwtSecret, (err, decodedToken) => {
-            if(err){
-                return res.status(401).json({ message: "Not authorized"})
-            }else{
-                if(decodedToken.role !== "admin"){
-                    return res.status(401).json({message: "Not authorized"})
-                }else{
-                    next()
-                }
-            }
-        })
-    }else{
-        return res.status(401)
-        .json({message: "Not authorized, token not available"})
-    }
-}
-
-//BASIC USER AUTHENTICATION
-export function userAuth(req, res, next) {
-    const token = req.cookies.jwt
-    if (token) {
-      verify(token, jwtSecret, (err, decodedToken) => {
-        if (err) {
-          return res.status(401).json({ message: "Not authorized" })
+exports.adminAuth = (req, res, next) => {
+  const token = req.cookies.jwt;
+  if (token) {
+    jwt.verify(token, jwtSecret, (err, decodedToken) => {
+      if (err) {
+        return res.status(401).json({ message: "Not authorized" });
+      } else {
+        if (decodedToken.role !== "admin") {
+          return res.status(401).json({ message: "Not authorized" });
         } else {
-          if (decodedToken.role !== "Basic") {
-            return res.status(401).json({ message: "Not authorized" })
-          } else {
-            next()
-          }
+          next();
         }
-      })
-    } else {
-      return res
-        .status(401)
-        .json({ message: "Not authorized, token not available" })
-    }
+      }
+    });
+  } else {
+    return res
+      .status(401)
+      .json({ message: "Not authorized, token not available" });
   }
+};
+exports.userAuth = (req, res, next) => {
+  const token = req.cookies.jwt;
+  if (token) {
+    jwt.verify(token, jwtSecret, (err, decodedToken) => {
+      if (err) {
+        return res.status(401).json({ message: "Not authorized" });
+      } else {
+        if (decodedToken.role !== "Basic") {
+          return res.status(401).json({ message: "Not authorized" });
+        } else {
+          next();
+        }
+      }
+    });
+  } else {
+    return res
+      .status(401)
+      .json({ message: "Not authorized, token not available" });
+  }
+};

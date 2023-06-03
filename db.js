@@ -1,8 +1,8 @@
-const { connect } = require("mongoose");
+const Mongoose = require("mongoose");
 const database = "mongodb+srv://vladzizic:PasQ4fXrDthSHITw@cluster0.omezruv.mongodb.net/user-authentication";
 
 const connectDB = async () => {
-    await connect(database, {
+    await Mongoose.connect(database, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })

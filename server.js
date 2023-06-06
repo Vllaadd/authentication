@@ -6,6 +6,7 @@ const { adminAuth, userAuth } = require("./middleware/auth.js");
 
 const PORT = 3000;
 
+// CONFIGURING VIEW ENGINE FOR EXPRESS APPLICATION
 app.set("view engine", "ejs");
 
 connectDB();

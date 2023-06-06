@@ -4,7 +4,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const { adminAuth, userAuth } = require("./middleware/auth.js");
 
-const PORT = 5000;
+const PORT = 3000;
 
 app.set("view engine", "ejs");
 
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-app.use("/api/auth", require("./Auth/route"));
+app.use("/api/auth", require("./auth/route"));
 
 app.get("/", (req, res) => res.render("home"));
 app.get("/register", (req, res) => res.render("register"));

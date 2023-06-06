@@ -13,7 +13,7 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser());
 
-// Routes
+// ROUTES
 app.use("/api/auth", require("./auth/route"));
 
 app.get("/", (req, res) => res.render("home"));

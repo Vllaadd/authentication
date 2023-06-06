@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 
 const jwtSecret =
   "4715aed3c946f7b0a38e6b534a9583628d84e96d10fbc04700770d572af3dce43625dd";
+
+// REGISTER
 exports.register = async (req, res, next) => {
   const { username, password } = req.body;
   if (password.length < 6) {
@@ -42,6 +44,7 @@ exports.register = async (req, res, next) => {
   });
 };
 
+// LOGIN
 exports.login = async (req, res, next) => {
   const { username, password } = req.body;
 
@@ -94,6 +97,7 @@ exports.login = async (req, res, next) => {
   }
 };
 
+// UPDATE
 exports.update = async (req, res, next) => {
   const { role, id } = req.body;
   // Verifying if role and id is presnt
@@ -135,6 +139,7 @@ exports.update = async (req, res, next) => {
   }
 };
 
+// DELETE USER 
 exports.deleteUser = async (req, res, next) => {
   const { id } = req.body;
   await User.findById(id)

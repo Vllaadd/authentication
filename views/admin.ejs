@@ -16,6 +16,8 @@
     <script>
         const ul = document.querySelector("ul")
         const display = document.querySelector(".display")
+
+        
         const getUsers = async () => {
             const res = await fetch("/api/auth/getUsers")
             const data = await res.json()

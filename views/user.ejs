@@ -17,8 +17,9 @@
                 const data = await res.json()
                 data.user.map(mappedUser => {
                     if(mappedUser.username !== "admin"){
-                        let li = `<li> <b>Username</b> => ${mappedUser.username} <br> <b>Role</b> => ${mappedUser.role} </li>`
-                        ul.innerHTML += FileList
+                        let li = document.createElement("li");
+                        li.innerHTML = `<b>Username</b> => ${mappedUser.username} <br> <b>Role</b> => ${mappedUser.role}`
+                        ul.appendChild(li);
                     } else {
                         return null
                     }

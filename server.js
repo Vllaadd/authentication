@@ -3,6 +3,7 @@ const connectDB = require("./db");
 const app = express();
 const cookieParser = require("cookie-parser");
 const { adminAuth, userAuth } = require("./middleware/auth.js");
+app.use("/api/auth", require("./auth/route"));
 
 const PORT = 3000;
 
@@ -15,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // ROUTES
-app.use("/api/auth", require("./auth/route"));
+
 app.get("/", (req, res) => res.render("home"));
 app.get("/register", (req, res) => res.render("register"));
 app.get("/login", (req, res) => res.render("login"));

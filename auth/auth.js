@@ -100,7 +100,7 @@ exports.login = async (req, res, next) => {
 // UPDATE
 exports.update = async (req, res, next) => {
   const { role, id } = req.body;
-  // Verifying if role and id is presnt
+  // Verifying if role and id are present
   if (role && id) {
     // Verifying if the value of role is admin
     if (role === "admin") {

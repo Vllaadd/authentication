@@ -9,14 +9,20 @@ This project focuses on user authentication and provides functionality for user 
     3. JavaScript 
     4. MERN 
 
-## Methods Used 
-    • .create()- Used to create a new user in the database using the User model 
-    • .json() - used to send a JSON response back to the client after successfully creating a user 
-    • .findOne() - used to search for a user in thedatabse based on the provided "username" and "password" 
-    • .deleteOne() - function provided by Mongoose used to delete a single document
-    • jsonwebtoken - to send tokens to registered clients 
-    • hash password - to hide passwords stored in database
-    • cookie-parser to protect the routes
+## Technology breakdown
+   1. `const { username, password } = req.body;`: destructuring assignment to extract username and password from the req.body. 
+   2. `bcrypt.hash(password, 10)`: bcrypt library is used here to hash a password. hash is a bcrypt library method. 
+   3. `    const token = jwt.sign(
+          { id: user._id, username, role: user.role },
+          jwtSecret,
+          {
+            expiresIn: maxAge, // 3hrs
+          }
+        );`: This is how jSON Web Token (JWT) is generated. JWTs are commonly used for authentication and authorization purproses, allowing users to securely access certain parts of a web application. 
+    4. `  res.cookie("jwt", token, {
+          httpOnly: true,
+          maxAge: maxAge * 1000,
+        });`: this is how an HTTP cookie in a Node.js application is set up, as part of an authentication or session management process. 
 
 ## Usage 
     1. Register: Create your account by providing a unique username and password 
